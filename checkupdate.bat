@@ -13,13 +13,13 @@ goto gpl
 ::GPL notice
 cls
 title POLI %currentver% version: GPL notice
-echo POLI %currentver% Copyright (C) 2011  Punyman
+echo POLI %currentver% Copyright (C) 2015 Rickey Mandraque
 echo    This program comes with ABSOLUTELY NO WARRANTY; neither express not implied
 echo    This is free software, and you are welcome to redistribute it
 echo    under certain conditions;read the license for details.
 echo    POLI is not responsible for any data loss resulting from
-echo    improper use of this utility, including Data corruption, 
-echo    or bricked flashcarts. FlashcartHelper is distributed in the hope that
+echo    improper use of this utility, including Data corruption. 
+echo    POLI is distributed in the hope that
 echo    it will be useful, but this does not guarantee that it will be. 
 echo    By continuing, it is assumed that you agree to the following terms
 pause
