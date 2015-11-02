@@ -5,6 +5,7 @@ Echo Ce script doit etre lancer en tant qu'administrateur
 ECHO sur un ORDINATEUR avec un systeme Windows (1.0 à 10.0.10)
 ECHO Pour les versions de Windows Vista Veuillez procéder aux mise à jour.
 ECHO si ce n'est pas le cas faites CTRL+C et relancez le.
+set currentver=2.3
 pause
 %windir%\system32\reg.exe query "HKU\S-1-5-19" >nul 2>&1 || (
 	cls
@@ -30,6 +31,11 @@ pause
 )
 
 cls
+echo.
+echo                    Bienvenue Sur Phoenix OffLine Installer          v%currentver%
+echo                           What do you wish to do?
+echo                     __________________________________
+
 IF EXIST %TEMP%\PACK_LOG-OK.txt (GOTO INSTALLOK) ELSE (GOTO DEBUT)
 
 
@@ -61,6 +67,7 @@ GOTO OSTYPE
 ECHO installation du pack logiciel "Phoenix Informatique" sur le poste %COMPUTERNAME% le %DATE% à %TIME% par %TECHNAME% >> %LOG%
 ECHO Deploiment de Phoenix OffLine Installer (POLI) sur le poste %COMPUTERNAME% le %DATE% à %TIME% par %TECHNAME% 
 ECHO l'architecture du poste est un %PROCESSOR_ARCHITECTURE% >> %LOG%
+ECHO l'architecture du poste est un %PROCESSOR_ARCHITECTURE%
 REM script de détermination de l'OS
 REM Detection de l'OS
 ECHO Detection de l'OS
