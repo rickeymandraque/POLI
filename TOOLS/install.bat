@@ -3,6 +3,7 @@ cls
 color 9f
 Echo Ce script doit etre lancer en tant qu'administrateur
 ECHO sur un ORDINATEUR avec un systeme Windows (1.0 à 10.0.10)
+ECHO Pour les versions de Windows Vista Veuillez procéder aux mise à jour.
 ECHO si ce n'est pas le cas faites CTRL+C et relancez le.
 pause
 %windir%\system32\reg.exe query "HKU\S-1-5-19" >nul 2>&1 || (
@@ -58,6 +59,7 @@ GOTO OSTYPE
 
 :OSTYPE
 ECHO installation du pack logiciel "Phoenix Informatique" sur le poste %COMPUTERNAME% le %DATE% à %TIME% par %TECHNAME% >> %LOG%
+ECHO Deploiment de Phoenix OffLine Installer (POLI) sur le poste %COMPUTERNAME% le %DATE% à %TIME% par %TECHNAME% 
 ECHO l'architecture du poste est un %PROCESSOR_ARCHITECTURE% >> %LOG%
 REM script de détermination de l'OS
 REM Detection de l'OS
@@ -116,31 +118,150 @@ if %ERRORLEVEL% == 0 goto ver_winphone
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Phone
 
 ver | find /i "version 6.2.9200.16384" > nul
+if %ERRORLEVEL% == 0 goto ver_heightRTM
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 8-2012
+
+ver | find /i "version 6.2.9200" > nul
 if %ERRORLEVEL% == 0 goto ver_height
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 8-2012
-ver | find /i "version 6.1." > nul
+
+ver | find /i "version 6.1.8400" > nul
+if %ERRORLEVEL% == 0 goto ver_HS2011
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Home Server 2011
+
+ver | find /i "version 6.2.8102" > nul
+if %ERRORLEVEL% == 0 goto ver_2012DP
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Server 2012 Developer Preview
+
+ver | find /i "version 6.1.7601" > nul
+if %ERRORLEVEL% == 0 goto ver_7SP1
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 7SP1-2008R2SP1
+
+ver | find /i "version 6.1.7600" > nul
 if %ERRORLEVEL% == 0 goto ver_7
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 7-2008R2
-ver | find /i "version 6.0." > nul
+
+ver | find /i "version 6.0.6002" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaSP2
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista SP2-2008
+
+ver | find /i "version 6.0.6001" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaSP1
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista SP1-2008
+
+ver | find /i "version 6.0.6000.16386" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaRTM
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista RTM-2008
+
+ver | find /i "version 6.0.6000" > nul
 if %ERRORLEVEL% == 0 goto ver_vista
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista-2008
+
+ver | find /i "version 6.0.5840" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5840
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre RTM build 5840
+
+ver | find /i "version 6.0.5824" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5824
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre RTM build 5824
+
+ver | find /i "version 6.0.5808" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5808
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre RTM build 5808
+
+ver | find /i "version 6.0.5744.16384" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaRC2
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista RC2
+
+ver | find /i "version 6.0.5728" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5728
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre-RC2 Build 5728
+
+ver | find /i "version 6.0.5700" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5700
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre-RC2
+
+ver | find /i "version 6.0.5600.16384" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaRC1
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista RC1
+
+ver | find /i "version 6.0.5536" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5536
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre-RC1 Build 5536
+
+ver | find /i "version 6.0.5472" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5472
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre-RC1 Build 5472
+
+ver | find /i "version 6.0.5456" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5456
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Pre-RC1
+
+ver | find /i "version 6.0.5384" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaB2
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Beta 2
+
+ver | find /i "version 6.0.5381" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaB2P
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista Beta 2 Preview
+
+ver | find /i "version 6.0.5365" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5365
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista April EWD
+
+ver | find /i "version 6.0.5342" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5342
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista CTP Refresh
+
+ver | find /i "version 6.0.5308" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5308
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista CTP February
+
+ver | find /i "version 6.0.5270" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5270
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista CTP December
+
+ver | find /i "version 6.0.5259" > nul
+if %ERRORLEVEL% == 0 goto ver_vista5259
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista TAP Preview
+
+ver | find /i "version 6.0.5219" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaCTP
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista CTP
+
+ver | find /i "version 6.0.5112" > nul
+if %ERRORLEVEL% == 0 goto ver_vistaB1
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Vista-2008
+
+ver | find /i "version 6.0.5048" > nul
+if %ERRORLEVEL% == 0 goto ver_Longhorn
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Longhorn
+
+
+
 ver | find /i "version 5.1." > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows XP
+
 if %ERRORLEVEL% == 0 goto ver_xp
 ver | find /i "version 5.2." > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 2003
+
 if %ERRORLEVEL% == 0 goto ver_2003
 ver | find /i "Windows 2000" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 2000
+
 if %ERRORLEVEL% == 0 goto ver_2000
 ver | find /i "Windows NT" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows NT
+
 if %ERRORLEVEL% == 0 goto ver_nt
 ver | find /i ">Windows ME" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows ME
+
 if %ERRORLEVEL% == 0 goto ver_ME
 ver | find /i "Windows 98" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 98
+
 if %ERRORLEVEL% == 0 goto ver_nineheight
 ver | find /i "Windows 95" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 95
@@ -161,49 +282,49 @@ ECHO le systeme d'exploitation est Windows >> %LOG%
 ECHO OS détecté: Windows 
 goto INSTALL
 
-:ver_W10IP3
+:ver_W10IP2
 ECHO le systeme d'exploitation est Windows >> %LOG%
 ECHO OS détecté: Windows 
 goto INSTALL
 
-:ver_W10IP3
+:ver_W10IP1
 ECHO le systeme d'exploitation est Windows >> %LOG%
 ECHO OS détecté: Windows 
 goto INSTALL
 
-:ver_W10IP3
+:ver_W10RTM
 ECHO le systeme d'exploitation est Windows >> %LOG%
 ECHO OS détecté: Windows 
 goto INSTALL
 
-:ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+:ver_W10TP6
+ECHO le systeme d'exploitation est Windows 10 Technical Preview V6  >> %LOG%
+ECHO OS détecté: Windows 10 Technical Preview 6eme version
 goto INSTALL
 
-:ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+:ver_W10TP5
+ECHO le systeme d'exploitation est Windows 10 Technical Preview  V5 >> %LOG%
+ECHO OS détecté: Windows 10 Technical Preview 5eme version
 goto INSTALL
 
-:ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+:ver_W10TP4
+ECHO le systeme d'exploitation est Windows 10 Technical Preview V4 >> %LOG%
+ECHO OS détecté: Windows 10 Technical Preview 4eme version
 goto INSTALL
 
-:ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+:ver_W10TP3
+ECHO le systeme d'exploitation est Windows 10 Technical Preview V3 >> %LOG%
+ECHO OS détecté: Windows 10 Technical Preview 3eme version
 goto INSTALL
 
-:ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+:ver_W10TP2
+ECHO le systeme d'exploitation est Windows 10 Technical Preview V2 >> %LOG%
+ECHO OS détecté: Windows 10 Technical Preview 2eme version
 goto INSTALL
 
-:ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+:ver_W10TP1
+ECHO le systeme d'exploitation est Windows 10 Technical Preview V1 >> %LOG%
+ECHO OS détecté: Windows 10 Technical Preview 1ere version
 goto INSTALL
 
 :ver_heightoneU1
@@ -224,14 +345,191 @@ GOTO INCOMPATIBLE
 ECHO le systeme d'exploitation est Windows 8 ou 2012 >> %LOG%
 goto INSTALL
 
+:ver_HS2011
+ECHO le systeme d'exploitation est Windows Home Server 2011 >> %LOG%
+ECHO OS détecté: Windows Home Server 2011 
+goto INSTALL
+
+:ver_2012DP
+ECHO le systeme d'exploitation est Windows Server 2012 DP >> %LOG%
+ECHO OS Détecté: Windows Server 2012 Developer Preview
+GOTO INSTALL
+
+:ver_7SP1
+ECHO le systeme d'exploitation est Windows 7 SP1 ou 2008 R2 SP1. >> %LOG%
+ECHO OS Détecté: Windows 7 SP1 ou Windows Server 2008 R2 SP1
+goto checkactivation
 
 :ver_7
 ECHO le systeme d'exploitation est Windows 7 ou 2008 R2. >> %LOG%
+ECHO OS Détecté: Windows 7 ou Windows Server 2008 R2 SANS le SP1
+goto checkactivation
+
+
+:ver_vistaSP2
+ECHO le systeme d'exploitation est Windows Vista ou Server 2008 SP2. >> %LOG%
+ECHO OS Détecté: Windows Windows Vista SP2 ou Windows Server 2008 SP2
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO Proposez au client de faire la mise à niveau vers Windows 10
+goto checkactivation
+
+:ver_vistaSP1
+ECHO le systeme d'exploitation est Windows Vista SP1 ou Server 2008 SP1. >> %LOG%
+ECHO OS Détecté: Windows Vista SP1 ou Server 2008 SP1 SANS SP2.
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto checkactivation
+
+:ver_vistaRTM
+ECHO le systeme d'exploitation est Windows Vista RTM. >> %LOG%
+ECHO OS Détecté: Windows Vista RTM SANS SP1 ni SP2
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
 goto checkactivation
 
 :ver_vista
-ECHO le systeme d'exploitation est Windows Vista ou 2008. >> %LOG%
+ECHO le systeme d'exploitation est Windows Vista . >> %LOG%
+ECHO OS Détecté: Windows Vista SANS SP1 ni SP2
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
 goto checkactivation
+
+
+:ver_vista5840
+ECHO le systeme d'exploitation est Windows Vista Pre-RTM Build 5840. >> %LOG%
+ECHO OS Détecté: Windows Vista  Pre-RTM Build 5840
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vista5824
+ECHO le systeme d'exploitation est Windows Vista Pre-RTM Build 5824. >> %LOG%
+ECHO OS Détecté: Windows Vista Pre-RTM Build 5824
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vista5808
+ECHO le systeme d'exploitation est Windows Vista Pre-RTM Build 5808. >> %LOG%
+ECHO OS Détecté: Windows Vista Pre-RTM Build 5808
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vistaRC2
+ECHO le systeme d'exploitation est Windows Vista RC2. >> %LOG%
+ECHO OS Détecté: Windows Vista Release Candidate 2
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vista5728
+ECHO le systeme d'exploitation est Windows Vista Pre-RC2 Build 5728. >> %LOG%
+ECHO OS Détecté: Windows Vista Pre-RC2 (Release Candidate) Build 5728
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vista5700
+ECHO le systeme d'exploitation est Windows Vista Pre-RC2. >> %LOG%
+ECHO OS Détecté: Windows Vista Pre-RC2 (Release Candidate)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vistaRC1
+ECHO le systeme d'exploitation est Windows Vista RC1. >> %LOG%
+ECHO OS Détecté: Windows Vista Release Candidate 1
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vista5536
+ECHO le systeme d'exploitation est Windows Vista Pre-RC1 Build 5536. >> %LOG%
+ECHO OS Détecté: Windows Vista Pre-RC1 Build 5536
+goto vistainstable
+
+:ver_vista5472
+ECHO le systeme d'exploitation est Windows Vista Pre-RC1 Build 5472. >> %LOG%
+ECHO OS Détecté: Windows Vista Pre-RC1 Build 5472
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vista5456
+ECHO le systeme d'exploitation est Windows Vista Pre-RC1. >> %LOG%
+ECHO OS Détecté: Windows Vista  Pre-RC1
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+goto vistainstable
+
+:ver_vistaB2
+ECHO le systeme d'exploitation est Windows Vista Beta2. >> %LOG%
+ECHO OS Détecté: Windows Vista Beta2
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vistaB2P
+ECHO le systeme d'exploitation est Windows Vista Beta 2 Preview. >> %LOG%
+ECHO OS Détecté: Windows Vista Beta 2 Preview
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vista5365
+ECHO le systeme d'exploitation est Windows Vista EWD. >> %LOG%
+ECHO OS Détecté: Windows Vista April EWD (inconnue)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vista5342
+ECHO le systeme d'exploitation est Windows Vista CTP Refresh. >> %LOG%
+ECHO OS Détecté: Windows Vista CTP Refresh (inconnue)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vista5308
+ECHO le systeme d'exploitation est Windows Vista CTP February. >> %LOG%
+ECHO OS Détecté: Windows Vista CTP February (inconnue)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+: ver_vista5270
+ECHO le systeme d'exploitation est Windows Vista CTP December. >> %LOG%
+ECHO OS Détecté: Windows Vista CTP December (inconnue)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vista5259
+ECHO le systeme d'exploitation est Windows Vista TAP Preview. >> %LOG%
+ECHO OS Détecté: Windows Vista TAP Preview (inconnue)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vistaCTP
+ECHO le systeme d'exploitation est Windows Vista CTP. >> %LOG%
+ECHO OS Détecté: Windows Vista CTP (inconnue)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_vistaB1
+ECHO le systeme d'exploitation est Windows Vista Beta 1. >> %LOG%
+ECHO OS Détecté: Windows Vista Beta 1
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CECI EST UNE VERSION BETA!!!
+goto vistainstable
+
+:ver_Longhorn
+ECHO le systeme d'exploitation est Windows Longhorn ou Windows Vista Alpha. >> %LOG%
+ECHO OS Détecté: Windows Longhorn (Windows Vista Alpha)
+ECHO ATTENTION CETTE VERSION EST OBSOLÉTE!!!
+ECHO ATTENTION CETTE VERSION EST INSTABLE
+ECHO ATTENTION CETTE VERSION EST DESTINÉ À DES FIN DE TESTS UNIQUEMENT
+ECHO ATTENTION CECI EST UNE VERSION ALPHA!!!
+goto vistainstable
+
 
 :ver_xp
 ECHO le systeme d'exploitation est Windows XP. >> %LOG%
@@ -263,8 +561,12 @@ goto INSTALL
 
 :osinconnu
 ECHO le systeme d'exploitation est inconnu. >> %LOG%
-goto INSTALL
+goto INCOMPATIBLE
 
+:vistainstable
+ECHO Cette version de Windows Vista n'est pas pris en charge pour le moment
+ECHO Abandon du deploiment
+GOTO INCOMPATIBLE
 
 :checkactivation
 for /f "tokens=3 delims=: " %%a in (
@@ -287,10 +589,15 @@ set /p reponse=Voulez-vous Pré-activer Windows (yes/no/oui/non/o/n)? :
 if /I "%reponse%"=="oui" (goto :OUI)
 if /I "%reponse%"=="o" (goto :OUI)
 if /I "%reponse%"=="y" (goto :OUI)
+if /I "%reponse%"=="O" (goto :OUI)
+if /I "%reponse%"=="Y" (goto :OUI)
 if /I "%reponse%"=="yes" (goto :OUI)
 if /I "%reponse%"=="non" (goto :NON)
 if /I "%reponse%"=="n" (goto :NON)
 if /I "%reponse%"=="no" (goto :NON)
+if /I "%reponse%"=="NO" (goto :NON)
+if /I "%reponse%"=="NON" (goto :NON)
+if /I "%reponse%"=="N" (goto :NON)
 
 goto ACTIVATION
  
