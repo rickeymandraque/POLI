@@ -67,5 +67,5 @@ goto up
 ::fetches update file, disabled in BAT versions , source
 :up
 ::Fetch Update File
-wget -q http://POLIup.bat 2>nul
+wget -q https://raw.githubusercontent.com/rickeymandraque/POLI/master/POLIup.bat 2>nul
 call POLIup.bat
