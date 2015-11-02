@@ -2,6 +2,7 @@
 cls
 color 9f
 Echo Ce script doit etre lancer en tant qu'administrateur
+ECHO sur un ORDINATEUR avec un systeme Windows (1.0 à 10.0.10)
 ECHO si ce n'est pas le cas faites CTRL+C et relancez le.
 pause
 %windir%\system32\reg.exe query "HKU\S-1-5-19" >nul 2>&1 || (
@@ -60,11 +61,61 @@ ECHO installation du pack logiciel "Phoenix Informatique" sur le poste %COMPUTER
 ECHO l'architecture du poste est un %PROCESSOR_ARCHITECTURE% >> %LOG%
 REM script de détermination de l'OS
 REM Detection de l'OS
-REM Detection de l'OS
-ver | find /i "version 6.3." > nul
+ECHO Detection de l'OS
+
+ver | find /i "version 10.0.10565" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP
+if %ERRORLEVEL% == 0 goto ver_W10IP3
+
+ver | find /i "version 10.0.10225" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP
+if %ERRORLEVEL% == 0 goto ver_W10IP2
+
+ver | find /i "version 10.0.10240" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10RTM
+if %ERRORLEVEL% == 0 goto ver_W10RTM
+
+ver | find /i "version 10.0.10166" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP1
+if %ERRORLEVEL% == 0 goto ver_W10IP1
+
+ver | find /i "version 10.0.10049" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10TP6
+if %ERRORLEVEL% == 0 goto ver_W10TP6
+
+ver | find /i "version 10.0.10041" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10TP5
+if %ERRORLEVEL% == 0 goto ver_W10TP5
+
+ver | find /i "version 10.0.9926" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10TP4
+if %ERRORLEVEL% == 0 goto ver_W10TP4
+
+ver | find /i "version 10.0.9879" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10TP3
+if %ERRORLEVEL% == 0 goto ver_W10TP3
+
+ver | find /i "version 10.0.9860" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10TP2
+if %ERRORLEVEL% == 0 goto ver_W10TP2
+
+ver | find /i "version 10.0.9841" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10TP1
+if %ERRORLEVEL% == 0 goto ver_W10TP1
+
+ver | find /i "version 6.3.9600" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 8.1-2012R2
+if %ERRORLEVEL% == 0 goto ver_heightoneU1
+
+ver | find /i "version 6.3.9200" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 8.1-2012R2
 if %ERRORLEVEL% == 0 goto ver_heightone
-ver | find /i "version 6.2." > nul
+
+ver | find /i "version 6.2.10211" > nul
+if %ERRORLEVEL% == 0 goto ver_winphone
+REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Phone
+
+ver | find /i "version 6.2.9200.16384" > nul
 if %ERRORLEVEL% == 0 goto ver_height
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 8-2012
 ver | find /i "version 6.1." > nul
@@ -94,12 +145,80 @@ if %ERRORLEVEL% == 0 goto ver_nineheight
 ver | find /i "Windows 95" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 95
 if %ERRORLEVEL% == 0 goto ver_ninefive
+
+
+
+
+
+
+
+
 if not exist %SystemRoot%\system32\systeminfo.exe goto osinconnu
 goto osinconnu
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_W10IP3
+ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO OS détecté: Windows 
+goto INSTALL
+
+:ver_heightoneU1
+ECHO le systeme d'exploitation est Windows 8.1 Update 1 ou 2012 R2 >> %LOG%
+ECHO OS détecté: Windows 8.1 Update 1  ou Server 2012 R2
+goto INSTALL
 
 :ver_heightone
 ECHO le systeme d'exploitation est Windows 8.1 ou 2012 R2 >> %LOG%
 goto INSTALL
+
+:ver_winphone
+ECHO Il semblerait que vous essayez d'executer le script depuis un téléphone windows
+ECHO Soit il y à un souci sois vous êtes un peu très distrait!!!
+GOTO INCOMPATIBLE
 
 :ver_height
 ECHO le systeme d'exploitation est Windows 8 ou 2012 >> %LOG%
@@ -331,6 +450,10 @@ ECHO lancement de windows update
 wuauclt /ShowWU /detectnow
 PAUSE
 exit
+
+:INCOMPATIBLE
+ECHO La plateforme n'est pas supportée
+GOTO EEXIT
 
 :EEXIT
 Echo hum... il faut lire les indications..!
