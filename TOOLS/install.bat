@@ -2,9 +2,9 @@
 cls
 color 9f
 Echo Ce script doit etre lancer en tant qu'administrateur
-ECHO sur un ORDINATEUR avec un systeme Windows (1.0 à 10.0.10)
+ECHO sur un ORDINATEUR avec un systeme Windows de 95 (4.0) à Windows10 (10.0.10)
 ECHO Pour les versions de Windows Vista Veuillez procéder aux mise à jour.
-ECHO si ce n'est pas le cas faites CTRL+C et relancez le.
+ECHO si ce n'est pas le cas faites CTRL+C et relancez le script.
 set currentver=2.3
 pause
 %windir%\system32\reg.exe query "HKU\S-1-5-19" >nul 2>&1 || (
@@ -40,6 +40,16 @@ IF EXIST %TEMP%\PACK_LOG-OK.txt (GOTO INSTALLOK) ELSE (GOTO DEBUT)
 
 
 :debut
+REM Variable pour alléger le code
+
+set =echo le systeme d'exploitation est Windows 
+set =echo OS détecté: Windows 
+set =echo ATTENTION CETTE VERSION DE WINDOWS EST OBSOLÉTE!!!
+set =echo ATTENTION CECI EST UNE VERSION BETA DE WINDOWS!!!
+set =echo ATTENTION CETTE VERSION EST DE WINDOWS INSTABLE!!!
+set =echo ATTENTION CECI EST UNE VERSION ALPHA DE WINDOWS!!!
+
+
 set TECHNAME=BETA TEST
 set SETUP="%TEMP%\Phoenix\Setups"
 set LOG="%TEMP%\Phoenix.log"
@@ -76,13 +86,13 @@ ver | find /i "version 10.0.10565" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP
 if %ERRORLEVEL% == 0 goto ver_W10IP3
 
-ver | find /i "version 10.0.10225" > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP
-if %ERRORLEVEL% == 0 goto ver_W10IP2
-
 ver | find /i "version 10.0.10240" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=W10RTM
 if %ERRORLEVEL% == 0 goto ver_W10RTM
+
+ver | find /i "version 10.0.10225" > nul
+REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP
+if %ERRORLEVEL% == 0 goto ver_W10IP2
 
 ver | find /i "version 10.0.10166" > nul
 REM if %errorlevel%==0 set $VERSIONWINDOWS=W10IP1
@@ -244,63 +254,110 @@ ver | find /i "version 6.0.5048" > nul
 if %ERRORLEVEL% == 0 goto ver_Longhorn
 REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows Longhorn
 
+ver | find /i "version 5.2.3790.1218" > nul
+if %ERRORLEVEL% == 0 goto ver_server2003
 
+ver | find /i "version 5.2.3790.1180" > nul
+if %ERRORLEVEL% == 0 goto ver_server2003SP1
 
-ver | find /i "version 5.1." > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows XP
+ver | find /i "version 5.2.3790" > nul
+if %ERRORLEVEL% == 0 goto ver_xppro64
 
-if %ERRORLEVEL% == 0 goto ver_xp
-ver | find /i "version 5.2." > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 2003
+ver | find /i "version 5.2.3763" > nul
+if %ERRORLEVEL% == 0 goto ver_2003B
 
-if %ERRORLEVEL% == 0 goto ver_2003
-ver | find /i "Windows 2000" > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 2000
+ver | find /i "version 5.2.3718" > nul
+if %ERRORLEVEL% == 0 goto ver_NETserverRC2
 
+ver | find /i "version 5.2.3660" > nul
+if %ERRORLEVEL% == 0 goto ver_NETserverRC1
+
+ver | find /i "version 5.2.3590" > nul
+if %ERRORLEVEL% == 0 goto ver_NETserverB3
+
+ver | find /i "version 5.2.3541" > nul
+if %ERRORLEVEL% == 0 goto ver_NETserverinterim
+
+ver | find /i "version 5.1.2600.2180" > nul
+if %ERRORLEVEL% == 0 goto ver_XPSP2
+
+ver | find /i "version 5.1.2600.1105-1106" > nul
+if %ERRORLEVEL% == 0 goto ver_XPSP1
+
+ver | find /i "version 5.1.2600" > nul
+if %ERRORLEVEL% == 0 goto ver_XP
+
+ver | find /i "version 5.1.2505" > nul
+if %ERRORLEVEL% == 0 goto ver_XPRC1
+
+ver | find /i "version 5.0.2195" > nul
+if %ERRORLEVEL% == 0 goto ver_2000PRO
+
+ver | find /i "version 5.00.2195" > nul
 if %ERRORLEVEL% == 0 goto ver_2000
-ver | find /i "Windows NT" > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows NT
 
-if %ERRORLEVEL% == 0 goto ver_nt
-ver | find /i ">Windows ME" > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows ME
+ver | find /i "version 5.00.2183" > nul
+if %ERRORLEVEL% == 0 goto ver_2000B3
 
+ver | find /i "version 5.00.2128" > nul
+if %ERRORLEVEL% == 0 goto ver_2000B3RC2
+
+ver | find /i "version 5.00.2031" > nul
+if %ERRORLEVEL% == 0 goto ver_2000B3RC1
+
+ver | find /i "version 5.00.1515" > nul
+if %ERRORLEVEL% == 0 goto ver_NT5B2
+
+ver | find /i "version 4.90.3000" > nul
 if %ERRORLEVEL% == 0 goto ver_ME
-ver | find /i "Windows 98" > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 98
 
-if %ERRORLEVEL% == 0 goto ver_nineheight
-ver | find /i "Windows 95" > nul
-REM if %errorlevel%==0 set $VERSIONWINDOWS=Windows 95
-if %ERRORLEVEL% == 0 goto ver_ninefive
+ver | find /i "version 4.90.2419" > nul
+if %ERRORLEVEL% == 0 goto ver_MEB2
 
+ver | find /i "version 4.90.2476" > nul
+if %ERRORLEVEL% == 0 goto ver_MEB
 
+ver | find /i "version 4.10.2222" > nul
+if %ERRORLEVEL% == 0 goto ver_98SE
 
+ver | find /i "version 4.10.1998" > nul
+if %ERRORLEVEL% == 0 goto ver_98
 
+ver | find /i "version 4.00.1381" > nul
+if %ERRORLEVEL% == 0 goto ver_NT4
 
+ver | find /i "version 4.03.1214" > nul
+if %ERRORLEVEL% == 0 goto ver_95OSR25
 
+ver | find /i "version 4.03.1212-1214" > nul
+if %ERRORLEVEL% == 0 goto ver_95OSR21
 
+ver | find /i "version 4.03.1111" > nul
+if %ERRORLEVEL% == 0 goto ver_95OSR2
+
+ver | find /i "version 4.00.950" > nul
+if %ERRORLEVEL% == 0 goto ver_95
 
 if not exist %SystemRoot%\system32\systeminfo.exe goto osinconnu
 goto osinconnu
 
 :ver_W10IP3
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+ECHO le systeme d'exploitation est Windows 10 Insider Preview V3 >> %LOG%
+ECHO OS détecté: Windows 10 Insider Preview 3
 goto INSTALL
 
 :ver_W10IP2
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+ECHO le systeme d'exploitation est Windows 10 Insider Preview V2 >> %LOG%
+ECHO OS détecté: Windows 10 Insider Preview 2
 goto INSTALL
 
 :ver_W10IP1
-ECHO le systeme d'exploitation est Windows >> %LOG%
-ECHO OS détecté: Windows 
+ECHO le systeme d'exploitation est Windows 10 Insider Preview V1 >> %LOG%
+ECHO OS détecté: Windows 10 Insider Preview
 goto INSTALL
 
 :ver_W10RTM
-ECHO le systeme d'exploitation est Windows >> %LOG%
+ECHO le systeme d'exploitation est Windows 10 RTM >> %LOG%
 ECHO OS détecté: Windows 
 goto INSTALL
 
