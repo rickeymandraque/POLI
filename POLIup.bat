@@ -1,29 +1,29 @@
-::Phoenix OffLine Installer updater
+::Phoenix OffLine Installer Toolkit updater
 @echo off
 color 9f
 set newver=2.3
-echo POLI is currently at %currentver%
+echo la version actuel de PO-LI est %currentver%
 pause
 IF %newver% GTR %currentver% goto update
 IF %newver% EQU %currentver% goto noup
 IF %newver% LSS %currentver% goto beta
 
 :noup
-echo Latest POLI is at %newver%
-echo There are no new updates at this time
+echo La derniere version de PO-LI est %newver%
+echo Il n'y a pas de nouvelle mise à jour pour le moment
 pause
-call FlashcartHelper
+call something
 
 :beta
-echo WARNING! You are running a beta version of POLI.
+echo ATTENTION! Vous utilisez une version de test de  PO-LI.
 pause
 call POLI
 :update
 cls
-echo There is an update from %currentver% to %newver%
-echo Press any key to update.
+echo Mise à jour de la version %currentver% à la version %newver%
+echo pressez une touche pour faire la mise à jour.
 pause 2>nul
-echo POLI is updating to %newver%
+echo PO-LI est en cour de mise à jour vers la version %newver%
 start /wait wget https://github.com/rickeymandraque/POLI/POLI.up
 del something.exe
 ren poli.up poli.exe
